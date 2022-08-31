@@ -1,0 +1,44 @@
+
+
+
+import { DatabaseAccessType } from '../data.types';
+import { ValidateRequest } from '../middlewares/errorhandler';
+import { check } from 'express-validator';
+import express from 'express';
+import AuthController from '../controllers/auth.controller';
+import passport from 'passport';
+
+const router = express.Router();
+
+export default (connection: DatabaseAccessType) => {
+
+  const authorization = new AuthController(connection);
+
+  router.post('/', 
+  [
+    check('firstname').exists().trim().escape().isString(),
+    check('lastname').exists().trim().escape().isString(),
+    check('email').exists().trim().escape().isEmail(),
+    check('password').exists().trim().escape().isString()
+  ], 
+  ValidateRequest, 
+  authorization.create_account);
+
+  router.post('/local-login', 
+  [
+    check('email').trim().isEmail().exists(),
+    check('password').trim().exists().isString()
+  ],
+  ValidateRequest,
+  passport.authenticate('local'),
+  authorization.login_callback);
+
+  router.get('/google-login', 
+  passport.authenticate('google', {scope: ['profile', 'email']}));
+
+  router.get('/google-callback', 
+  passport.authenticate('google'), 
+  authorization.login_callback);
+
+  return router;
+}
