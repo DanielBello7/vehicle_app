@@ -48,3 +48,15 @@ The application makes use of QR-Codes to handle data storage and transmission
 ## Address
 
 - heroku address: https://vehicle-auth-app.herokuapp.com/
+
+### Deployment Process
+
+- run "npm run build" on general server folder to create a JS version of the app inside the public folder
+
+- take documents from public folder and insert into server/build/src
+
+- add folder server/src/env to build/src
+
+- commit changes to git in folder server/build
+
+- push changes to heroku
