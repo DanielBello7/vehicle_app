@@ -42,3 +42,7 @@ The application makes use of QR-Codes to handle data storage and transmission
 - http://localhost:7070/api/v1/auth/google-login [google-login] [GET]
 
 - http://localhost:7070/api/v1/auth/login-callback [google-login-callback] [GET]
+
+## Address
+
+- heroku address: https://vehicle-auth-app.herokuapp.com/
