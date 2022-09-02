@@ -33,6 +33,8 @@ export default (connection: DatabaseAccessType) => {
   passport.authenticate('local'),
   authorization.login_callback);
 
+  router.get('/all-users', authorization.get_all_users);
+
   router.get('/google-login', 
   passport.authenticate('google', {scope: ['profile', 'email']}));
 

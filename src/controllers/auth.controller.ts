@@ -36,6 +36,20 @@ class AuthController {
   public login_callback = async (req: RequestInterface, res: Response) => {
     return res.json({msg: 'logged in', payload: req.user, success: true});
   }
+
+  public get_all_users = async (req: RequestInterface, res: Response) => {
+    try {
+
+      const response = await this.connection.GetUsers();
+      if (!response.success) return res.status(404).json({msg: 'Not found', payload: response.result});
+
+      return res.json({msg: 'Found', payload: response.result});
+    }
+    catch (error) {
+      log.error(error);
+      return res.status(500).json({msg: 'Error'});
+    }
+  }
 }
 
 export default AuthController;
