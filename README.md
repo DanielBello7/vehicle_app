@@ -60,3 +60,7 @@ The application makes use of QR-Codes to handle data storage and transmission
 - commit changes to git in folder server/build
 
 - push changes to heroku
+
+## Heroku Terminal
+
+-run "heroku logs --tail" for terminal watching
