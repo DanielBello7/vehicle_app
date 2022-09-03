@@ -1,6 +1,6 @@
 # Server for the Vehicle Verification Application
 
-VVA
+VVApp
 
 ## Description
 
