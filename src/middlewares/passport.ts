@@ -33,7 +33,7 @@ function initialize(passport: PassportStatic, connection: DatabaseAccessType) {
   const google = new GoogleStrategy({
     clientID: process.env.CLIENT_ID as string,
     clientSecret: process.env.CLIENT_SECRET as string,
-    callbackURL: 'http://localhost:7070/api/v1/auth/google-callback'
+    callbackURL: `${process.env.ADDRESS}/api/v1/auth/google-callback`
   }, 
   async (assTkn, refTkn, profile, done) => {
     
