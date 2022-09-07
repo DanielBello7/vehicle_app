@@ -24,7 +24,7 @@ export default (connection: DatabaseAccessType) => {
   ValidateRequest, 
   authorization.create_account);
 
-  router.post('/local-login', 
+  router.post('/login/local', 
   [
     check('email').trim().isEmail().exists(),
     check('password').trim().exists().isString()
@@ -33,12 +33,12 @@ export default (connection: DatabaseAccessType) => {
   passport.authenticate('local'),
   authorization.login_callback);
 
-  router.get('/all-users', authorization.get_all_users);
+  router.get('/users', authorization.get_all_users);
 
-  router.get('/google-login', 
+  router.get('/login/google', 
   passport.authenticate('google', {scope: ['profile', 'email']}));
 
-  router.get('/google-callback', 
+  router.get('/login/google/callback', 
   passport.authenticate('google'), 
   authorization.login_callback);
 

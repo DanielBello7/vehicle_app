@@ -37,13 +37,13 @@ The application makes use of QR-Codes to handle data storage and transmission
 
 - http://localhost:7070/api/v1/auth/ [create-account] [POST]
 
-- http://localhost:7070/api/v1/auth/local-login [local-login] [POST]
+- http://localhost:7070/api/v1/auth/login/local [local-login] [POST]
 
-- http://localhost:7070/api/v1/auth/google-login [google-login] [GET]
+- http://localhost:7070/api/v1/auth/login/google [google-login] [GET]
 
-- http://localhost:7070/api/v1/auth/login-callback [google-login-callback] [GET]
+- http://localhost:7070/api/v1/auth/login/google/callback [google-login-callback] [GET]
 
-- http://localhost:7070/api/v1/auth/all-users [get-users] [GET] [DEV]
+- http://localhost:7070/api/v1/auth/users [get-users] [GET] [DEV]
 
 ## Address
 
