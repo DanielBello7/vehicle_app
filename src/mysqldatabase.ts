@@ -3,7 +3,7 @@
 
 import mysql2 from 'mysql2';
 import { v4 as uuidv4 } from 'uuid';
-import { DatabaseAccessType, DatabaseResponse, NewUserType } from './data.types';
+import { DatabaseAccessType, DatabaseResponse, NewRegisterType, NewUserType } from './data.types';
 
 class DatabaseAccess implements DatabaseAccessType {
   private conn;
@@ -51,6 +51,71 @@ class DatabaseAccess implements DatabaseAccessType {
     if (response.length <= 0) return {msg: 'not found', result: null, success: false}
 
     return {msg: 'User found', result: response[0], success: true}
+  }
+
+  public ConfirmRegister = async (id: string): Promise<DatabaseResponse> => {
+    
+    const [request]: any = await this.conn.promise().query(
+      'SELECT * FROM registered WHERE _id = ?', 
+      [id]
+    );
+
+    if (request.length <= 0) 
+      return {msg: 'not found', result: {found: false}, success: true}
+
+    return {msg: 'found', result: {found: true}, success: true};
+  }
+
+  public GetRegisterData = async (filter: 'email' | '_id' | 'license', data: string): Promise<DatabaseResponse> => {
+
+    const [request] = await this.conn.promise().query(
+      `SELECT * from registered WHERE ${filter} = ?`, [data]
+    );
+
+    return {msg: "results", result: request, success: true}
+  } 
+
+  public CreateNewRegister = async (data: NewRegisterType): Promise<DatabaseResponse> => {
+
+    const _id = uuidv4();
+    const firstname = data.firstname;
+    const lastname = data.lastname;
+    const email = data.email;
+    const license = data.license;
+    const registeredBy = data.registeredBy;
+    const date = data.dateCreated;
+    const img = null;
+    const isVerified = false;
+
+    const [confirm]: any = await this.conn.promise().query(
+      'SELECT * FROM registered WHERE license = ?', 
+      [license]
+    );
+
+    if (confirm.length > 0) 
+      return {msg: 'license already registered', result: confirm, success: true}
+
+
+    const [request]: any = await this.conn.promise().query(
+      'INSERT INTO registered (_id, firstname, lastname, email, license, registeredBy, dateCreated, img, isVerified) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)', 
+      [_id, firstname, lastname, email, license, registeredBy, date, img, isVerified]
+    );
+
+    if (request.affectedRows <= 0) return {msg: 'not created', result: request, success: false}
+
+    const user = {
+      _id,
+      firstname,
+      lastname,
+      email,
+      license,
+      registeredBy,
+      dateCreated: date,
+      img,
+      isVerified
+    }
+
+    return {msg: 'created', result: user, success: true}
   }
 }
 
