@@ -45,6 +45,18 @@ The application makes use of QR-Codes to handle data storage and transmission
 
 - http://localhost:7070/api/v1/auth/users [get-users] [GET] [DEV]
 
+### registered
+
+- http://localhost:7070/api/v1/registered/ [create-new-register] [POST]
+
+- http://localhost:7070/api/v1/registered/confirmation/:id [confirm-register] [GET]
+
+- http://localhost:7070/api/v1/registered/details/email/:email [get-register-by-email] [GET]
+
+- http://localhost:7070/api/v1/registered/details/license/:license [get-register-by-license] [GET]
+
+- http://localhost:7070/api/v1/registered/details/id/:id [get-register-by-id] [GET]
+
 ## Address
 
 - heroku address: https://vehicle-auth-app.herokuapp.com/
