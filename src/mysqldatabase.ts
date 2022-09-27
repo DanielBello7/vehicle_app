@@ -18,7 +18,7 @@ class DatabaseAccess implements DatabaseAccessType {
   }
 
   public GetUsers = async (): Promise<DatabaseResponse> => {
-    const [rows] = await this.conn.promise().query('SELECT * FROM users');
+    const [rows] = await this.conn.promise().query('SELECT * FROM p1_users');
     return {msg: 'Results', result: rows, success: true}
   }
 
@@ -26,14 +26,14 @@ class DatabaseAccess implements DatabaseAccessType {
     const new_id = uuidv4();
 
     const [confirmation]: any = await this.conn.promise().query(
-      `SELECT * FROM users WHERE email = ?`, 
+      `SELECT * FROM p1_users WHERE email = ?`, 
       [data.email]
     );
 
     if (confirmation.length > 0) return {msg: 'User exists', result: null, success: false}
 
     const response = await this.conn.promise().query(
-      `INSERT INTO users (_id, firstname, lastname, email, password) VALUES (?, ?, ?, ?, ?)`, 
+      `INSERT INTO p1_users (_id, firstname, lastname, email, password) VALUES (?, ?, ?, ?, ?)`, 
       [new_id, data.firstname, data.lastname, data.email, data.password]
     );
 
@@ -44,7 +44,7 @@ class DatabaseAccess implements DatabaseAccessType {
 
   public GetUser = async (email: string): Promise<DatabaseResponse> => {
     const [response]: any = await this.conn.promise().query(
-      'SELECT * FROM users WHERE email = ?', 
+      'SELECT * FROM p1_users WHERE email = ?', 
       [email]
     );
 
@@ -56,7 +56,7 @@ class DatabaseAccess implements DatabaseAccessType {
   public ConfirmRegister = async (id: string): Promise<DatabaseResponse> => {
     
     const [request]: any = await this.conn.promise().query(
-      'SELECT * FROM registered WHERE _id = ?', 
+      'SELECT * FROM p1_registered WHERE _id = ?', 
       [id]
     );
 
@@ -69,7 +69,7 @@ class DatabaseAccess implements DatabaseAccessType {
   public GetRegisterData = async (filter: 'email' | '_id' | 'license', data: string): Promise<DatabaseResponse> => {
 
     const [request] = await this.conn.promise().query(
-      `SELECT * from registered WHERE ${filter} = ?`, [data]
+      `SELECT * from p1_registered WHERE ${filter} = ?`, [data]
     );
 
     return {msg: "results", result: request, success: true}
@@ -88,7 +88,7 @@ class DatabaseAccess implements DatabaseAccessType {
     const isVerified = false;
 
     const [confirm]: any = await this.conn.promise().query(
-      'SELECT * FROM registered WHERE license = ?', 
+      'SELECT * FROM p1_registered WHERE license = ?', 
       [license]
     );
 
@@ -97,7 +97,7 @@ class DatabaseAccess implements DatabaseAccessType {
 
 
     const [request]: any = await this.conn.promise().query(
-      'INSERT INTO registered (_id, firstname, lastname, email, license, registeredBy, dateCreated, img, isVerified) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)', 
+      'INSERT INTO p1_registered (_id, firstname, lastname, email, license, registeredBy, dateCreated, img, isVerified) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)', 
       [_id, firstname, lastname, email, license, registeredBy, date, img, isVerified]
     );
 

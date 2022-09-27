@@ -15,7 +15,7 @@ import SessionVisits from './middlewares/sessionVisits';
 import initialize from './middlewares/passport';
 import session from 'express-session';
 
-
+ 
 function App(connection: DatabaseAccessType) {
   const app: Application = express();
 
