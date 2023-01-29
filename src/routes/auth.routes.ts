@@ -35,12 +35,5 @@ export default (connection: DatabaseAccessType) => {
 
   router.get('/users', authorization.get_all_users);
 
-  router.get('/login/google', 
-  passport.authenticate('google', {scope: ['profile', 'email']}));
-
-  router.get('/login/google/callback', 
-  passport.authenticate('google'), 
-  authorization.login_callback);
-
   return router;
 }

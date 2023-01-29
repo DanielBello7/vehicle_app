@@ -1,10 +1,10 @@
 
 
 
-import express from 'express';
+import { ValidateRequest } from "../middlewares/errorhandler";
 import { DatabaseAccessType } from '../data.types';
 import { check } from "express-validator";
-import { ValidateRequest } from "../middlewares/errorhandler";
+import express from 'express';
 import RegisteredController from '../controllers/registered.controller';
 const router = express.Router();
 

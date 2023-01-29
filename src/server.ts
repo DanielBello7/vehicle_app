@@ -1,9 +1,6 @@
-
-
-
-import express, { Application } from 'express';
-import { DatabaseAccessType } from './data.types';
 import { HandlePageNotFound, HandleIconError } from './middlewares/errorhandler';
+import { DatabaseAccessType } from './data.types';
+import express, { Application } from 'express';
 import cors from 'cors';
 import routes from './routes/index.routes';
 import compression from 'compression';
@@ -23,7 +20,7 @@ function App(connection: DatabaseAccessType) {
 
   app.use(cors());
   app.use(compression());
-  app.use(express.json());
+  app.use(express.json({limit: "1GB"}));
   app.use(upload());
   app.use(express.static(path.join(__dirname, "static")));
   app.use(express.urlencoded({extended: true}));

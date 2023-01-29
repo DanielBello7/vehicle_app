@@ -16,8 +16,6 @@ const mysql_connection = new DatabaseAccess(
   process.env.DB_PASSWORD as string
 );
 
-console.log('TEST', process.env.TYPE);
-
 const serverApplication = App(mysql_connection);
 const server = http.createServer(serverApplication);
 const port = process.env.PORT || 7070;
