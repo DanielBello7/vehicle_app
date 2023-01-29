@@ -45,8 +45,6 @@ The application uses a MySQL Database for holding and storing information
 
 - http://localhost:7070/api/v1/auth/ [create-account] [POST]
 - http://localhost:7070/api/v1/auth/login/local [local-login] [POST]
-- http://localhost:7070/api/v1/auth/login/google [google-login] [GET]
-- http://localhost:7070/api/v1/auth/login/google/callback [google-login-callback] [GET]
 - http://localhost:7070/api/v1/auth/users [get-users] [GET] [DEV]
 
 ### REGISTERED
