@@ -34,7 +34,6 @@ The application uses a MySQL Database for holding and storing information
 - TypeScript
 - React Native
 - Docker
-- Heroku
 - Git
 - MySQL
 - Express
@@ -57,19 +56,7 @@ The application uses a MySQL Database for holding and storing information
 
 ## LIVE API ADDRESS
 
-- heroku address: https://vehicle-auth-app.herokuapp.com/
-
-### DEPLOYMENT PROCESS
-
-- run "npm run build" on general server folder to create a JS version of the app inside the public folder
-- take documents from public folder and insert into server/build/src
-- add folder server/src/env to build/src
-- commit changes to git in folder server/build
-- push changes to heroku
-
-## HEROKU TERMINAL
-
--run "heroku logs --tail" for terminal watching
+- live address: https://vehicleapp.inscriptconnect.space/api/v1
 
 ## WORKING PROCESS
 
